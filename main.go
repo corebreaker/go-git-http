@@ -1,6 +1,11 @@
-package roamingit
+package main
 
 import (
-    "gopkg.in/src-d/go-billy.v2"
-    "gopkg.in/src-d/go-git.v4"
+    _ "github.com/corebreaker/roamingit/auth"
+    _ "github.com/corebreaker/roamingit/grabber"
+    _ "github.com/corebreaker/roamingit/server"
 )
+
+func main() {
+
+}
