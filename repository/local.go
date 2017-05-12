@@ -1,12 +1,11 @@
 package repository
 
 import (
-    "fmt"
     "os"
     "path/filepath"
 
     "github.com/siddontang/go/ioutil2"
-    "gopkg.in/src-d/go-billy.v2"
+    _ "gopkg.in/src-d/go-billy.v2"
     "gopkg.in/src-d/go-git.v4"
 )
 
@@ -19,15 +18,15 @@ func (self *Space) RepositoryExists(name string) bool {
 }
 
 func (self *Space) OpenRepository(name string) (*git.Repository, error) {
-    path := filepath.Join(self.root, name + ".git")
+    path := filepath.Join(self.root, name+".git")
 
     if !ioutil2.FileExists(path) {
         return nil, ErrRepositoryNotExist(name)
     }
 
-    fs := billy.
+    //fs := billy.
 
-    return git.Open()
+    return git.Open(nil, nil)
 }
 
 func OpenSpace(root string) (*Space, error) {
@@ -41,7 +40,12 @@ func OpenSpace(root string) (*Space, error) {
             return nil, ErrPathNotDir(root)
         }
 
-        if !can_read(root) {
+        readable, err := can_read(root)
+        if err != nil {
+            return nil, err
+        }
+
+        if !readable {
             return nil, ErrNotReadable(root)
         }
     } else {
@@ -50,7 +54,9 @@ func OpenSpace(root string) (*Space, error) {
         }
     }
 
-    return &Space{
+    res := &Space{
         root: root,
     }
+
+    return res, nil
 }

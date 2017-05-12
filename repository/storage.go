@@ -12,8 +12,8 @@ import (
 
     "golang.org/x/tools/godoc/vfs"
     "golang.org/x/tools/godoc/vfs/zipfs"
-    "gopkg.in/src-d/go-billy.v2"
-    "gopkg.in/src-d/go-git.v4/storage/filesystem"
+    _ "gopkg.in/src-d/go-billy.v2"
+    _ "gopkg.in/src-d/go-git.v4/storage/filesystem"
 )
 
 type tRepositoryFilesystem struct {
@@ -60,10 +60,12 @@ type tRepositoryFile struct {
 */
 func OpenRepositoryFilesystem(path, name string) (*tRepositoryFilesystem, error) {
     //zfile, err := zip.
-    src, err := zipfs.New()
+    src := zipfs.New(nil, "")
 
     //var t billy.Filesystem
-    src.Lstat()
+    src.Lstat("")
+
+    return nil, nil
 }
 
 // Copyright 2011 The Go Authors. All rights reserved.

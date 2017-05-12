@@ -6,7 +6,7 @@ import (
 
 type ErrPathNotDir string
 
-func (self ErrNErrPathNotDirotExist) Error() string {²
+func (self ErrPathNotDir) Error() string {
     return fmt.Sprintf("Path [%s] is not a directory", string(self))
 }
 
